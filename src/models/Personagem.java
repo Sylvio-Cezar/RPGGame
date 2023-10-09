@@ -1,9 +1,12 @@
 package models;
 
+import interfaces.IAtacavel;
+import interfaces.IUsavel;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Personagem {
+public class Personagem implements IAtacavel, IUsavel {
     private String nome;
     private int nivel;
     private int saude;
@@ -21,18 +24,31 @@ public class Personagem {
         this.itens = new ArrayList<>();
     }
 
-    public void atacar(Inimigo inimigo) {
-        int dano = ((saude + energia) / 10) * nivel;
+    public void atacar(IAtacavel alvo) {
+        int dano = calcularDano();
         if (dano > 75) {
             dano = 75;
         }
         if (dano < 5) {
             dano = 5;
         }
-        System.out.println("Você atacou o inimigo " + inimigo.getNome());
-        inimigo.setSaude(inimigo.getSaude() - dano);
+        System.out.println(nome + " atacou " + ((Inimigo) alvo).getNome() + " causando " + dano + " de dano.");
+        ((Inimigo) alvo).receberDano(dano);
+        /* System.out.println("Você atacou o inimigo " + inimigo.getNome());
+        alvo.setSaude(inimigo.getSaude() - dano);
         inimigo.setEnergia(inimigo.getEnergia() - dano);
-        System.out.println("O inimigo " + inimigo.getNome() + " perdeu " + dano + " de saúde e energia.");
+        System.out.println("O inimigo " + inimigo.getNome() + " perdeu " + dano + " de saúde e energia."); */
+    }
+
+    private int calcularDano() {
+        return (saude + energia) / 10 * nivel;
+    }
+
+    public void receberDano(int dano) {
+        saude -= dano;
+        if (saude < 0) {
+            saude = 0;
+        }
     }
 
     public void pegarItem(Item item) {

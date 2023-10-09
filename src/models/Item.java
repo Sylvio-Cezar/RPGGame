@@ -1,5 +1,7 @@
 package models;
 
+import interfaces.IUsavel;
+
 public class Item {
     private String nome;
     private String descricao;
@@ -25,4 +27,5 @@ public class Item {
     public String toString() {
         return nome + ": " + descricao;
     }
+
 }

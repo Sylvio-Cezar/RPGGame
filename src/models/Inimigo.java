@@ -1,8 +1,10 @@
 package models;
 
+import interfaces.IAtacavel;
+
 import java.util.List;
 
-public class Inimigo {
+public class Inimigo implements IAtacavel {
     private String nome;
     private int nivel;
     private int saude;
@@ -17,17 +19,28 @@ public class Inimigo {
         this.habilidadesDeCombate = habilidadesDeCombate;
     }
 
-    public void atacar(Personagem personagem) {
-        int dano = ((saude + energia) / 10);
+    public void atacar(IAtacavel alvo) {
+        int dano = calcularDano();
         if (dano > 75) {
             dano = 75;
         }
         if (dano < 5) {
             dano = 5;
         }
-        System.out.println("O inimigo " + nome + " atacou " + personagem.getNome());
-        personagem.setSaude(personagem.getSaude() - dano);
-        System.out.println("O personagem " + personagem.getNome() + " perdeu " + dano + " de saúde.");
+        System.out.println(nome + " atacou " + ((Personagem)alvo).getNome() + " causando " + dano + " de dano.");
+        ((Personagem)alvo).receberDano(dano);
+    }
+
+    private int calcularDano() {
+        return (saude + energia) / 10;
+    }
+
+    public void receberDano(int dano) {
+        saude -= dano;
+        energia -= dano;
+        if (saude < 0) {
+            saude = 0;
+        }
     }
 
     public String getNome() {

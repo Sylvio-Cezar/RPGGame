@@ -1,5 +1,6 @@
 package main;
 
+import interfaces.IUsavel;
 import models.*;
 import mundoVirtual.MundoVirtual;
 
