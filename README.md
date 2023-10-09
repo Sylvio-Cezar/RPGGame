@@ -53,6 +53,14 @@ Você será avaliado com base nos seguintes critérios:
 - Uso adequado de princípios avançados de orientação a objetos, como herança, polimorfismo, encapsulamento, etc.
 - Qualidade do código, incluindo boas práticas de nomenclatura, modularização e organização.
 
+## Forma de Entrega
+
+- O exercício deve ser feito em dupla.
+- A entrega do código deve ser feita em um repositório do GitHub (**Não se esqueça de deixar o repositório público!**). Enviar o link do repositório para <ricardoej@gmail.com> com os dados a seguir:
+    - Assunto do email: "Trabalho 2 - POO" (**importante!! Vou usar a pesquisa do email para achar os trabalhos**)
+    - Corpo do email: Nome completo e link do repositório público
+- A entrega deve ser feita até o dia 09/10/2023
+
 ## Tempo de Execução
 
 Este é um desafio de nível muito difícil e pode levar dias ou até semanas para ser concluído, dependendo do escopo do jogo. Reserve tempo suficiente para planejar, projetar e implementar a solução. Boa sorte!
