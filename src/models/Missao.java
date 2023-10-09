@@ -1,3 +1,5 @@
+package models;
+
 import java.util.List;
 
 public class Missao {
@@ -17,16 +19,25 @@ public class Missao {
         System.out.println("A missão " + titulo + " foi iniciada por " + personagem.getNome());
     }
 
+    public void atualizar(Personagem personagem) {
+        System.out.println("Missão: " + titulo);
+        System.out.println("O personagem " + personagem.getNome() + " progrediu nos objetivos: " + objetivos);
+    }
+
     public void completar(Personagem personagem) {
         System.out.println("A missão " + titulo + " foi completada");
         for (Item item : recompensa) {
-            System.out.println("O item " + item + " foi adicionado ao inventário do jogador");
+            System.out.println("O item " + item.getNome() + " foi adicionado ao inventário do personagem" + personagem.getNome());
             personagem.pegarItem(item);
         }
     }
 
     public String getTitulo() {
         return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 }
 

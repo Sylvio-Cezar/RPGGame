@@ -1,3 +1,8 @@
+package main;
+
+import models.*;
+import mundoVirtual.MundoVirtual;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,28 +26,41 @@ public class Main {
         Missao missao1 = new Missao("Coletar Relíquias", "Encontre as antigas relíquias perdidas!",
                 List.of(new Item("Relíquia de Ouro", "Uma valiosa relíquia", "Relíquia", "Valor incalculável")),
                 "Coletar as relíquias escondidas no mapa");
-        Missao missao2 = new Missao("Derrotar o Dragão", "Enfrente o terrível Dragão e salve o reino!",
+        Missao missao2 = new Missao("Derrotar o Dragão", "Enfrente o Dragão!",
                 List.of(new Item("Espada Épica", "Uma espada poderosa", "Arma", "Dano +30")),
                 "Matar o dragão");
+        Missao missao3 = new Missao("Derrotar o Rei Demônio", "Enfrente o terrível Rei Demônio e salve o reino!",
+                List.of(new Item("Lança do Rei Demônio", "Uma lança inbuída em magia", "Arma", "Dano +100")),
+                "Matar o Rei Demônio e salvar o reino");
+
 
         mundo.adicionarMissao(missao1);
         mundo.adicionarMissao(missao2);
+        mundo.adicionarMissao(missao3);
 
         // Adicionando inimigos
         Inimigo inimigo1 = new Inimigo("Orc", 5, 120, 80, new ArrayList<>());
         Inimigo inimigo2 = new Inimigo("Dragão", 10, 250, 150, new ArrayList<>());
         Inimigo inimigo3 = new Inimigo("Goblin", 1, 40, 20, new ArrayList<>());
-
+        Inimigo inimigo4 = new Inimigo("Lobo", 3, 90, 50, new ArrayList<>());
+        Inimigo inimigo5 = new Inimigo("Rei Demônio", 15, 400, 200, new ArrayList<>());
 
         mundo.adicionarInimigo(inimigo1);
         mundo.adicionarInimigo(inimigo1);
         mundo.adicionarInimigo(inimigo2);
-        mundo.adicionarInimigo(inimigo2);
         mundo.adicionarInimigo(inimigo3);
         mundo.adicionarInimigo(inimigo3);
-
+        mundo.adicionarInimigo(inimigo3);
+        mundo.adicionarInimigo(inimigo3);
+        mundo.adicionarInimigo(inimigo3);
+        mundo.adicionarInimigo(inimigo4);
+        mundo.adicionarInimigo(inimigo4);
+        mundo.adicionarInimigo(inimigo4);
+        mundo.adicionarInimigo(inimigo4);
+        mundo.adicionarInimigo(inimigo5);
 
         System.out.println("Você está pronto para começar sua jornada!");
+        jogador1.pegarHabilidade(habilidade1);
 
         while (true) {
             int escolha;
@@ -65,14 +83,15 @@ public class Main {
                 case 1 -> {
                     System.out.println(jogador1.getNome() + " - Nível: " + jogador1.getNivel() + " Saúde: "
                             + jogador1.getSaude() + " Energia: " + jogador1.getEnergia());
-                    System.out.println("Itens: " + jogador1.getItens().toString());
+                    System.out.println("Itens: " + jogador1.getItens());
+                    System.out.println("Habilidades: " + jogador1.getHabilidades());
                 }
                 case 2 -> {
                     System.out.println("Missões disponíveis:");
                     if (mundo.getMissoes().size() > 0) {
                         for (int i = 0; i < mundo.getMissoes().size(); i++) {
                             Missao missao = mundo.getMissoes().get(i);
-                            System.out.println(i + 1 + ". " + missao.getTitulo());
+                            System.out.println(i + 1 + ". " + missao.getTitulo() + ": " + missao.getDescricao());
                         }
                     } else {
                         System.out.println("Não há missões disponíveis");
@@ -83,7 +102,7 @@ public class Main {
                     if (mundo.getMissoes().size() > 0) {
                         for (int i = 0; i < mundo.getMissoes().size(); i++) {
                             Missao missao = mundo.getMissoes().get(i);
-                            System.out.println(i + 1 + ". " + missao.getTitulo());
+                            System.out.println(i + 1 + ". " + missao.getTitulo() + ": " + missao.getDescricao());
                         }
                         System.out.print("Escolha uma missão para iniciar (Digite o número): ");
                         int escolhaMissao = scanner.nextInt();
@@ -110,16 +129,24 @@ public class Main {
                         int indiceInimigoEscolhido = (int) (Math.random() * inimigosDisponiveis.size());
                         Inimigo inimigoEscolhido = inimigosDisponiveis.get(indiceInimigoEscolhido);
                         mundo.iniciarCombate(inimigoEscolhido, jogador1);
-                        if (inimigoEscolhido.getNome().equals("Dragão") && jogador1.getMissaoAtiva().equals(missao2)) {
-                            jogador1.getMissaoAtiva().completar(jogador1);
-                            mundo.removerMissao(jogador1.getMissaoAtiva());
+                        if (jogador1.getMissaoAtiva() != null) {
+                            if (inimigoEscolhido.getNome().equals("Dragão") && jogador1.getMissaoAtiva().equals(missao2)) {
+                                jogador1.getMissaoAtiva().atualizar(jogador1);
+                                jogador1.getMissaoAtiva().completar(jogador1);
+                                mundo.removerMissao(jogador1.getMissaoAtiva());
+                            } else if (inimigoEscolhido.getNome().equals("Rei Demônio") && jogador1.getMissaoAtiva().equals(missao3)) {
+                                jogador1.getMissaoAtiva().atualizar(jogador1);
+                                jogador1.getMissaoAtiva().completar(jogador1);
+                                mundo.removerMissao(jogador1.getMissaoAtiva());
+                            }
                         }
                     } else {
-                        if (Math.random() < 0.4 && !jogador1.getMissaoAtiva().equals(missao1)) {
+                        if (Math.random() < 0.4 && (jogador1.getMissaoAtiva() == null || !jogador1.getMissaoAtiva().equals(missao1))) {
                             System.out.println("Você encontrou uma poção de cura!");
                             jogador1.pegarItem(item1);
-                        } else if (Math.random() < 0.4 && jogador1.getMissaoAtiva().equals(missao1)) {
+                        } else if (Math.random() < 0.4 && (jogador1.getMissaoAtiva() != null && jogador1.getMissaoAtiva().equals(missao1))) {
                             System.out.println("Você encontrou as relíquias perdidas!");
+                            jogador1.getMissaoAtiva().atualizar(jogador1);
                             jogador1.getMissaoAtiva().completar(jogador1);
                             mundo.removerMissao(jogador1.getMissaoAtiva());
                         } else {

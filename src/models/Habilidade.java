@@ -1,3 +1,5 @@
+package models;
+
 public class Habilidade {
     private String nome;
     private String descricao;
@@ -16,5 +18,14 @@ public class Habilidade {
         } else {
             System.out.println("A habilidade " + nome + " não pôde ser ativada, energia insuficiente!");
         }
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    @Override
+    public String toString() {
+        return nome + ": " + descricao + ", custo de energia: " + custoEnergia;
     }
 }

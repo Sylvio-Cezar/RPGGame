@@ -1,3 +1,5 @@
+package models;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,11 @@ public class Personagem {
     public void pegarItem(Item item) {
         System.out.println("Você pegou o item " + item.getNome());
         itens.add(item);
+    }
+
+    public void pegarHabilidade(Habilidade habilidade) {
+        System.out.println("Você ganhou a habilidade " + habilidade.getNome());
+        habilidades.add(habilidade);
     }
 
     public void caminhar(double x, double y) {
@@ -81,6 +88,10 @@ public class Personagem {
 
     public List<Item> getItens() {
         return itens;
+    }
+
+    public List<Habilidade> getHabilidades() {
+        return habilidades;
     }
 
     public Missao getMissaoAtiva() {
