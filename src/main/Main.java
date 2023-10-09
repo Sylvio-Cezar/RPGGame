@@ -82,46 +82,46 @@ public class Main {
 
             switch (escolha) {
                 case 1 -> {
-                    System.out.println(jogador1.getNome() + " - Nível: " + jogador1.getNivel() + " Saúde: "
+                    System.out.println("\n" + jogador1.getNome() + " - Nível: " + jogador1.getNivel() + " Saúde: "
                             + jogador1.getSaude() + " Energia: " + jogador1.getEnergia());
                     System.out.println("Itens: " + jogador1.getItens());
                     System.out.println("Habilidades: " + jogador1.getHabilidades());
                 }
                 case 2 -> {
-                    System.out.println("Missões disponíveis:");
+                    System.out.println("\nMissões disponíveis:");
                     if (mundo.getMissoes().size() > 0) {
                         for (int i = 0; i < mundo.getMissoes().size(); i++) {
                             Missao missao = mundo.getMissoes().get(i);
                             System.out.println(i + 1 + ". " + missao.getTitulo() + ": " + missao.getDescricao());
                         }
                     } else {
-                        System.out.println("Não há missões disponíveis");
+                        System.out.println("\nNão há missões disponíveis");
                     }
                 }
                 case 3 -> {
-                    System.out.println("Missões disponíveis:");
+                    System.out.println("\nMissões disponíveis:");
                     if (mundo.getMissoes().size() > 0) {
                         for (int i = 0; i < mundo.getMissoes().size(); i++) {
                             Missao missao = mundo.getMissoes().get(i);
                             System.out.println(i + 1 + ". " + missao.getTitulo() + ": " + missao.getDescricao());
                         }
-                        System.out.print("Escolha uma missão para iniciar (Digite o número): ");
+                        System.out.print("\nEscolha uma missão para iniciar (Digite o número): ");
                         int escolhaMissao = scanner.nextInt();
                         if (escolhaMissao >= 1 && escolhaMissao <= mundo.getMissoes().size()) {
                             Missao missaoSelecionada = mundo.getMissoes().get(escolhaMissao - 1);
                             jogador1.setMissaoAtiva(missaoSelecionada);
                             jogador1.getMissaoAtiva().iniciar(jogador1);
                         } else {
-                            System.out.println("Opção de missão inválida.");
+                            System.out.println("\nOpção de missão inválida.");
                         }
                     } else {
-                        System.out.println("Não há missões disponíveis");
+                        System.out.println("\nNão há missões disponíveis");
                     }
                 }
                 case 4 -> {
-                    System.out.println("Digite a posição X: ");
+                    System.out.println("\nDigite a posição X: ");
                     double posX = scanner.nextDouble();
-                    System.out.println("Digite a posição Y: ");
+                    System.out.println("\nDigite a posição Y: ");
                     double posY = scanner.nextDouble();
                     jogador1.caminhar(posX, posY);
                     double probabilidadeEncontro = 0.3;
@@ -143,44 +143,44 @@ public class Main {
                         }
                     } else {
                         if (Math.random() < 0.4 && (jogador1.getMissaoAtiva() == null || !jogador1.getMissaoAtiva().equals(missao1))) {
-                            System.out.println("Você encontrou uma poção de cura!");
+                            System.out.println("\nVocê encontrou uma poção de cura!");
                             jogador1.pegarItem(item1);
                         } else if (Math.random() < 0.4 && (jogador1.getMissaoAtiva() != null && jogador1.getMissaoAtiva().equals(missao1))) {
-                            System.out.println("Você encontrou as relíquias perdidas!");
+                            System.out.println("\nVocê encontrou as relíquias perdidas!");
                             jogador1.getMissaoAtiva().atualizar(jogador1);
                             jogador1.getMissaoAtiva().completar(jogador1);
                             mundo.removerMissao(jogador1.getMissaoAtiva());
                         } else {
-                            System.out.println("Você não encontrou nada!");
+                            System.out.println("\nVocê não encontrou nada!");
                         }
                     }
                 }
                 case 5 -> {
                     if (jogador1.getItens().size() >= 1) {
-                        System.out.println("Itens disponíveis:");
+                        System.out.println("\nItens disponíveis:");
                         List<Item> itensDisponiveis = jogador1.getItens();
                         for (int i = 0; i < itensDisponiveis.size(); i++) {
                             Item item = itensDisponiveis.get(i);
                             System.out.println(i + 1 + ". " + item.getNome());
                         }
-                        System.out.print("Escolha um item para usar (Digite o número): ");
+                        System.out.print("\nEscolha um item para usar (Digite o número): ");
                         int escolhaItem = scanner.nextInt();
                         if (escolhaItem >= 1 && escolhaItem <= itensDisponiveis.size()) {
                             Item itemSelecionado = itensDisponiveis.get(escolhaItem - 1);
                             jogador1.usarItem(itemSelecionado);
                         } else {
-                            System.out.println("Opção de item inválida.");
+                            System.out.println("\nOpção de item inválida.");
                         }
                     } else {
-                        System.out.println("Não há itens disponíveis");
+                        System.out.println("\nNão há itens disponíveis");
                     }
                 }
                 case 6 -> {
-                    System.out.println("Obrigado por jogar!");
+                    System.out.println("\nObrigado por jogar!");
                     scanner.close();
                     System.exit(0);
                 }
-                default -> System.out.println("Opção inválida. Escolha novamente.");
+                default -> System.out.println("\nOpção inválida. Escolha novamente.");
             }
         }
     }

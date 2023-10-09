@@ -27,7 +27,7 @@ public class Missao {
     public void completar(Personagem personagem) {
         System.out.println("A missão " + titulo + " foi completada");
         for (Item item : recompensa) {
-            System.out.println("O item " + item.getNome() + " foi adicionado ao inventário do personagem" + personagem.getNome());
+            System.out.println("O item " + item.getNome() + " foi adicionado ao inventário do personagem " + personagem.getNome());
             personagem.pegarItem(item);
         }
     }
